@@ -102,6 +102,51 @@ void put_off_fire() {
     fire=false;
 }
 
+void automatic_mode() {
+    Serial.println("Auto Running!");  
+    if (digitalRead(Left) == HIGH && digitalRead(Right) == HIGH && digitalRead(Forward) == HIGH) 
+    {
+    delay(500);
+    digitalWrite(LM1, HIGH);
+    digitalWrite(LM2, HIGH);
+    digitalWrite(RM1, HIGH);
+    digitalWrite(RM2, HIGH);
+    }
+    else if (digitalRead(Forward) == LOW) 
+    {
+    digitalWrite(LM1, LOW);
+    digitalWrite(LM2, HIGH);
+    digitalWrite(RM1, LOW);
+    digitalWrite(RM2, HIGH);
+    fire = true;
+    
+    }
+    
+    else if (digitalRead(Left) == LOW)
+    {
+    digitalWrite(LM1, HIGH);
+    digitalWrite(LM2, LOW);
+    digitalWrite(RM1, HIGH);
+    digitalWrite(RM2, HIGH);
+    }
+    
+    else if (digitalRead(Right) == LOW) 
+    {
+    digitalWrite(LM1, HIGH);
+    digitalWrite(LM2, HIGH);
+    digitalWrite(RM1, HIGH);
+    digitalWrite(RM2, LOW);
+    }
+
+    delay(400);//change this value to change the distance
+   
+    while (fire == true)
+    {
+      put_off_fire();
+      Serial.println("Fire Detected.");
+    }
+}
+
 void loop() {
   myservo.write(90);
 
@@ -147,7 +192,7 @@ void loop() {
     }   
 
     if (digitalRead(Forward) == LOW || digitalRead(Left) == LOW || digitalRead(Right) == LOW) {
-      put_off_fire();
+      automatic_mode();
     }
     
   }
