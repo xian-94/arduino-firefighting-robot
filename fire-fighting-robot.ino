@@ -124,17 +124,17 @@ void automatic_mode() {
     
     else if (digitalRead(Left) == LOW)
     {
-    digitalWrite(LM1, HIGH);
+    digitalWrite(LM1, LOW);
     digitalWrite(LM2, LOW);
-    digitalWrite(RM1, HIGH);
+    digitalWrite(RM1, LOW);
     digitalWrite(RM2, HIGH);
     }
     
     else if (digitalRead(Right) == LOW) 
     {
-    digitalWrite(LM1, HIGH);
+    digitalWrite(LM1, LOW);
     digitalWrite(LM2, HIGH);
-    digitalWrite(RM1, HIGH);
+    digitalWrite(RM1, LOW);
     digitalWrite(RM2, LOW);
     }
 
